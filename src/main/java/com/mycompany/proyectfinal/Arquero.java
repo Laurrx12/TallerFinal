@@ -14,7 +14,12 @@ public class Arquero extends Personaje {
     }
 
     @Override
-    public String atacar() {
-        return nombre + " dispara flecha 🏹";
+    protected void atacar(String objetivo) {
+        System.out.println("  Arquero dispara a " + objetivo + " — daño: 55");
+    }
+
+    @Override
+    protected void aplicarEfectoEspecial() {
+        System.out.println("  Arquero gana ventaja crítica.");
     }
 }

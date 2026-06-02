@@ -55,5 +55,16 @@ public class Main {
         System.out.println(combo.ejecutar()    + " → " + combo.danio());
         System.out.println(conRayo.ejecutar()  + " → " + conRayo.danio());
         System.out.println(comboFull.ejecutar()+ " → " + comboFull.danio());
+        
+        Personaje[] equipo = { 
+            new Guerrero("Thorin"), 
+            new Mago("Gandalf"), 
+            new Arquero("Legolas"), 
+            new Paladin("Uther") 
+        };
+        
+        for (Personaje p : equipo) {
+            p.ejecutarTurno("Dragón");
+        }
     }
 }

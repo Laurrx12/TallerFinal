@@ -18,7 +18,7 @@ public class Guerrero extends Personaje {
     }
     
     @Override
-    public String atacar() {
-        return nombre + " golpea con espada ⚔️";
+    protected void atacar(String objetivo) {
+        System.out.println("  Guerrero golpea a " + objetivo + " — daño: 40");
     }
 }

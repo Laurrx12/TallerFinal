@@ -14,7 +14,12 @@ public class Paladin extends Personaje {
     }
 
     @Override
-    public String atacar() {
-        return nombre + " bendice con escudo sagrado 🛡️";
+    protected void atacar(String objetivo) {
+        System.out.println("  Paladín golpea con mazo a " + objetivo + " — daño: 50");
+    }
+
+    @Override
+    protected void aplicarEfectoEspecial() {
+        System.out.println("  Paladín bendice al equipo: +20 HP para todos.");
     }
 }

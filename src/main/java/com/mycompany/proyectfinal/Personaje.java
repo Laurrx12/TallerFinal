@@ -20,19 +20,19 @@ public abstract class Personaje {
     public String getNombre() { return nombre; }
     public int getHp() { return hp; }
 
+    // Observer
     public void suscribir(ObservadorPersonaje o) { observadores.add(o); }
     public void desuscribir(ObservadorPersonaje o) { observadores.remove(o); }
     private void notificar(String evento) { observadores.forEach(o -> o.actualizar(this, evento)); }
 
-    public abstract String atacar();
-
+    // Strategy dinámico de ataque
     public void setEstrategiaAtaque(EstrategiaAtaque e) {
         this.estrategiaAtaque = e;
         System.out.println("[Strategy] " + nombre + " cambia estrategia de ataque");
         notificar("cambia estrategia de ataque");
     }
 
-    public void atacar(String objetivo) {
+    public void atacarConEstrategia(String objetivo) {
         if (estrategiaAtaque != null) {
             String resultado = estrategiaAtaque.ejecutar(nombre, objetivo);
             System.out.println(resultado);
@@ -42,6 +42,7 @@ public abstract class Personaje {
         }
     }
 
+    // Strategy dinámico de defensa
     public void setEstrategiaDefensa(EstrategiaDefensa d) {
         this.estrategiaDefensa = d;
         System.out.println("[Strategy] " + nombre + " cambia estrategia de defensa");
@@ -58,6 +59,7 @@ public abstract class Personaje {
         }
     }
 
+    // Eventos
     public void recibirDanio(int d) {
         hp -= d;
         System.out.println(nombre + " recibe " + d + " de daño (HP=" + hp + ")");
@@ -68,4 +70,26 @@ public abstract class Personaje {
         System.out.println(nombre + " sube de nivel!");
         notificar("nivel");
     }
+
+    // Template Method
+    public final void ejecutarTurno(String objetivo) {
+        preparar();
+        atacar(objetivo);              // paso variante
+        aplicarEfectoEspecial();       // hook opcional
+        cerrarTurno();
+    }
+
+    private void preparar() {
+        System.out.println("  [" + getClass().getSimpleName() + "] Preparando...");
+    }
+
+    private void cerrarTurno() {
+        System.out.println("  [" + getClass().getSimpleName() + "] Finalizado.\n");
+    }
+
+    // Paso variante: cada subclase define su ataque
+    protected abstract void atacar(String objetivo);
+
+    // Hook opcional: por defecto vacío
+    protected void aplicarEfectoEspecial() { }
 }

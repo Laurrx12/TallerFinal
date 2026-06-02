@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyectfinal;
+
 /**
  *
  * @author Admin
@@ -14,7 +15,13 @@ public class Mago extends Personaje {
     }
 
     @Override
-    public String atacar() {
-        return nombre + " lanza bola de fuego 🔥";
+    protected void atacar(String objetivo) {
+        System.out.println("  Mago lanza hechizo a " + objetivo + " — daño: 70");
+    }
+
+    @Override
+    protected void aplicarEfectoEspecial() {
+        System.out.println("  El Mago regenera 10 de mana.");
     }
 }
+
