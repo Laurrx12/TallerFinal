@@ -7,47 +7,27 @@
  *
  * @author Admin
  */
+import Estrategias.AtaqueEspada;
+import Estrategias.AtaqueFurtivo;
+import Estrategias.EvasionRapida;
+import Estrategias.BarreraArcana;
+
 public class Main {
-
     public static void main(String[] args) {
+        Personaje thorin = new Guerrero("Thorin");
 
-        System.out.println("EQUIPO");
+        // Ataques dinámicos
+        thorin.setEstrategiaAtaque(new AtaqueEspada());
+        thorin.atacar("Dragón");
 
-        Personaje p1 =
-                FabricaPersonajes.crear("guerrero", "Thorin");
+        thorin.setEstrategiaAtaque(new AtaqueFurtivo());
+        thorin.atacar("Dragón");
 
-        Personaje p2 =
-                FabricaPersonajes.crear("mago", "Gandalf");
+        // Defensas dinámicas
+        thorin.setEstrategiaDefensa(new EvasionRapida());
+        thorin.defender();
 
-        Personaje p3 =
-                FabricaPersonajes.crear("arquero", "Legolas");
-
-        Personaje p4 =
-                FabricaPersonajes.crear("paladin", "Uther");
-
-        System.out.println(p1.atacar());
-        System.out.println(p2.atacar());
-        System.out.println(p3.atacar());
-        System.out.println(p4.atacar());
-
-        System.out.println("\nMISIONES");
-
-        GestorMisiones gm =
-                GestorMisiones.getInstance();
-
-        gm.agregarMision("Derrotar dragon");
-        gm.agregarMision("Rescatar aldeano");
-
-        gm.listar();
-
-        System.out.println("\nPRUEBA SINGLETON");
-
-        RegistroPartida r1 =
-                RegistroPartida.getInstancia();
-
-        RegistroPartida r2 =
-                RegistroPartida.getInstancia();
-
-        System.out.println(r1 == r2);
+        thorin.setEstrategiaDefensa(new BarreraArcana());
+        thorin.defender();
     }
 }
